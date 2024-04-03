@@ -6,7 +6,6 @@ export default function InputText({ label, error, ...props }) {
             <TextField
                 className="w-full"
                 {...props}
-                id="filled-basic"
                 label={label}
                 variant="filled"
                 error={error ? true : false}

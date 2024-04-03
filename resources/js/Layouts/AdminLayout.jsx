@@ -76,17 +76,17 @@ export default function AdminLayout({ children, title }) {
                             />
 
                             <MenuSidebar
-                                link={"admin.dashboard"}
+                                link={"admin.data-kader"}
                                 logo={
                                     <Contacts
                                         color="inherit"
                                         fontSize="inherit"
                                     />
                                 }
-                                title={"Data User"}
+                                title={"Data Kader"}
                             />
                             <MenuSidebar
-                                link={"admin.dashboard"}
+                                link={"admin.data-ibu"}
                                 logo={
                                     <PregnantWoman
                                         color="inherit"
@@ -96,7 +96,7 @@ export default function AdminLayout({ children, title }) {
                                 title={"Data Ibu"}
                             />
                             <MenuSidebar
-                                link={"admin.dashboard"}
+                                link={"admin.data-anak"}
                                 logo={
                                     <ChildFriendly
                                         color="inherit"
