@@ -1,9 +1,15 @@
 import { FormControl, InputLabel, Select } from "@mui/material";
 import React from "react";
 
-export default function SelectOption({ children, label, error, ...props }) {
+export default function SelectOption({
+    className,
+    children,
+    label,
+    error,
+    ...props
+}) {
     return (
-        <FormControl variant="filled" fullWidth>
+        <FormControl variant="filled" fullWidth className={className}>
             <InputLabel id="demo-simple-select-filled-label">
                 {label}
             </InputLabel>

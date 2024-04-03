@@ -119,7 +119,7 @@ export default function AdminLayout({ children, title }) {
                     </div>
                 </div>
             </Drawer>
-            <div className="py-4 px-4 md:px-8 lg:px-10 bg-slate-950 h-full">
+            <div className="py-4 px-4 min-h-screen md:px-8 lg:px-10 bg-slate-950 h-full">
                 <h1 className="font-bold text-base md:text-lg lg:text-xl text-white border-pink-500 border-b-2 inline-block mb-3">
                     {title}
                 </h1>

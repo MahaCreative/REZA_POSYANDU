@@ -42,6 +42,8 @@ Route::post('update-data-kader', [DataKaderController::class, 'update'])->name('
 Route::delete('delete-data-kader', [DataKaderController::class, 'delete'])->name('admin.delete-data-kader');
 
 Route::get('data-ibu', [DataIbuController::class, 'index'])->name('admin.data-ibu');
+Route::get('form-data-ibu', [DataIbuController::class, 'form_data_ibu'])->name('admin.form-data-ibu');
+Route::get('form-update-data-ibu', [DataIbuController::class, 'form_update_data_ibu'])->name('admin.form-update-data-ibu');
 Route::post('post-data-ibu', [DataIbuController::class, 'store'])->name('admin.post-data-ibu');
 Route::post('update-data-ibu', [DataIbuController::class, 'update'])->name('admin.update-data-ibu');
 Route::delete('delete-data-ibu', [DataIbuController::class, 'delete'])->name('admin.delete-data-ibu');
