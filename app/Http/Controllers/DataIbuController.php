@@ -34,7 +34,7 @@ class DataIbuController extends Controller
             'telephone' => 'required|numeric|digits:12',
             'pendidikan_id' => 'required',
             'pekerjaan_id' => 'required',
-            'foto' => 'required',
+            'foto' => 'required|mimes:png,jpeg,jpg|image',
         ]);
         if ($request->file('foto')) {
             $attr['foto'] = $request->file('foto')->store('FotoIbu', 'public');
@@ -50,6 +50,33 @@ class DataIbuController extends Controller
     public function update(Request $request)
     {
 
-        dd($request->all());
+        $attr = $request->validate([
+            'nama_lengkap' => 'required|string|min:3',
+            'nik' => 'required|numeric|digits:16',
+            'tempat_lahir' => 'required|string|min:3',
+            'tgl_lahir' => 'required',
+            'gol_darah' => 'required',
+            'alamat' => 'required|string|min:4',
+            'desa' => 'required|string|min:4',
+            'dusun' => 'required|string|min:4',
+            'telephone' => 'required|numeric|digits:12',
+            'pendidikan_id' => 'required',
+            'pekerjaan_id' => 'required',
+
+        ]);
+        $dataIbu = DataIbu::findOrFail($request->id);
+        if($request->file('foto')) {
+            $request->validate([
+                'foto' => 'required|mimes:png,jpg,jpeg|image',
+            ]);
+            $attr['foto'] = $request->file('foto') ? $request->file('foto')->store('FotoIbu') : $dataIbu->foto;
+        }
+        $dataIbu->update($attr);
+    }
+
+    public function delete(Request $request){
+        $dataIbu = DataIbu::FindOrFail($request->id);
+        $dataIbu->delete();
+
     }
 }

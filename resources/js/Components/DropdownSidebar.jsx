@@ -8,7 +8,7 @@ export default function DropdownSidebar({ children, title, logo }) {
     return (
         <div
             className={`${
-                open ? "bg-pink-800" : ""
+                open ? "bg-pink-600" : ""
             } hover:cursor-pointer w-full gap-x-3 py-1 active:bg-pink-800   duration-300 transition-all my-1 font-light text-xs text-white `}
         >
             <div

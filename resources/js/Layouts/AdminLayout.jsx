@@ -11,7 +11,7 @@ import {
 } from "@mui/icons-material";
 import { Drawer } from "@mui/material";
 import React, { useState } from "react";
-
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 export default function AdminLayout({ children, title }) {
     const [drawer, setDrawer] = useState(false);
 
@@ -29,7 +29,7 @@ export default function AdminLayout({ children, title }) {
             </div>
             {/* Drawer */}
             <Drawer open={drawer} onClose={() => setDrawer(false)}>
-                <div className="bg-pink-600 h-full w-[250px]">
+                <div className="bg-pink-600 h-full w-[250px] ">
                     <div className="w-full items-center justify-center bg-pink-800 flex gap-5  py-3">
                         <img
                             src="Image/logo_posyandu.png"
@@ -106,7 +106,7 @@ export default function AdminLayout({ children, title }) {
                                 title={"Data Anak"}
                             />
                             <MenuSidebar
-                                link={"admin.dashboard"}
+                                link={"admin.data-keanggotaan-ibu"}
                                 logo={
                                     <PersonAdd
                                         color="inherit"
@@ -115,6 +115,66 @@ export default function AdminLayout({ children, title }) {
                                 }
                                 title={"Pendaftaran Keanggotaan Ibu"}
                             />
+                            <MenuSidebar
+                                link={"admin.data-kegiatan"}
+                                logo={
+                                    <AccessTimeFilledIcon
+                                        color="inherit"
+                                        fontSize="inherit"
+                                    />
+                                }
+                                title={"Kelola Jadwal Kegiatan"}
+                            />
+                        </DropdownSidebar>
+                         <DropdownSidebar
+                            title={"Pelayanan"}
+                            logo={
+                                <MiscellaneousServicesOutlined
+                                    color="inherit"
+                                    fontSize="inherit"
+                                />
+                            }
+                            >
+                             <MenuSidebar
+                                    link={"admin.data-kegiatan"}
+                                    logo={
+                                        <AccessTimeFilledIcon
+                                            color="inherit"
+                                            fontSize="inherit"
+                                        />
+                                    }
+                                    title={"Pelayanan Anak"}
+                                />
+                                <MenuSidebar
+                                    link={"admin.data-kegiatan"}
+                                    logo={
+                                        <AccessTimeFilledIcon
+                                            color="inherit"
+                                            fontSize="inherit"
+                                        />
+                                    }
+                                    title={"Pelayanan Ibu"}
+                                />
+                        </DropdownSidebar>
+                        <DropdownSidebar
+                            title={"Statistik Pelayanan"}
+                            logo={
+                                <MiscellaneousServicesOutlined
+                                    color="inherit"
+                                    fontSize="inherit"
+                                />
+                            }
+                        >
+                        </DropdownSidebar>
+                          <DropdownSidebar
+                            title={"Laporan"}
+                            logo={
+                                <MiscellaneousServicesOutlined
+                                    color="inherit"
+                                    fontSize="inherit"
+                                />
+                            }
+                        >
                         </DropdownSidebar>
                     </div>
                 </div>

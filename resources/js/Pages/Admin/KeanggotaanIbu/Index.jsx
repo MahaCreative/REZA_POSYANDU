@@ -1,54 +1,73 @@
+import React, {useState} from 'react'
+import AdminLayout from "@/Layouts/AdminLayout";
 import InputText from "@/Components/InputText";
 import Loading from "@/Components/Loading";
-import AdminLayout from "@/Layouts/AdminLayout";
 import { Link, router } from "@inertiajs/react";
 import { Add, Delete, Edit } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
-import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
+export default function Index(props){
+	const [openLoading, setOpenLoading] = useState(false)
+	const keanggotaanIbu = props.keanggotaanIbu;
 
-export default function Index(props) {
-    const [openLoading, setOpenLoading] = useState(false);
-    const dataIbu = props.dataIbu;
     const columns = [
         {
-            name: "Nama Lengkap",
-            selector: (row) => row.nama_lengkap,
+            name: "Kode Anggota",
+            selector: (row) => row.kode_anggota, width:"120px",
             wrap: true,
         },
-        { name: "NIK", selector: (row) => row.nik, width: "100px" },
+        { name: "Nama Ibu", selector: (row) => row.ibu.nama_lengkap, width: "140px", wrap:true },
         {
-            name: "Tempat Lahir",
-            selector: (row) => row.tempat_lahir + ", " + row.tgl_lahir,
+            name: "NIK",
+            selector: (row) => row.ibu.nik,
+            width:"120px",
             wrap: true,
         },
 
         {
-            name: "Alamat",
-            selector: (row) =>
-                row.alamat + ` Desa ${row.desa} Dusun ${row.dusun}`,
-            wrap: true,
-        },
-        { name: "Telephone", selector: (row) => row.telephone },
-        { name: "Golongan Darah", selector: (row) => row.gol_darah },
-        {
-            name: "Pekerjaan",
-            selector: (row) => row.pekerjaan.nama,
+            name: "Tanggal Pendaftaran",
+            selector: (row) => row.tanggal_pendaftaran, width:"150px",
             wrap: true,
         },
         {
-            name: "Pendidikan",
-            selector: (row) => row.pendidikan.nama,
+            name: "Hamil",
+            selector: (row) => "Anak Ke "+row.hamil_ke ,
+            wrap: true,
+        },
+         {
+            name: "BB/TB",
+            selector: (row) => `${row.berat_badan} Kg / ${row.tinggi_badan} Cm`,
+            wrap: true,
+        },
+        { name: "HPHT", selector: (row) => row.hpht, width:"130px" },
+        { name: "HTP", selector: (row) => row.htp, width:"130px" },
+        {
+            name: "Riwayat Penyakit",
+            selector: (row) => row.riwayat_penyakit, width:"150px", wrap:true,
             wrap: true,
         },
         {
-            name: "Foto",
+            name: "Foto KTP",
             selector: (row) => (
                 <>
                     <a target="_blank" href={"storage/" + row.foto}>
                         <img
-                            src={"storage/" + row.foto}
+                            src={"storage/" + row.foto_ktp}
+                            alt=""
+                            className="w-[40px]"
+                        />
+                    </a>
+                </>
+            ),
+        },
+         {
+            name: "Foto KK",
+            selector: (row) => (
+                <>
+                    <a target="_blank" href={"storage/" + row.foto}>
+                        <img
+                            src={"storage/" + row.foto_kk}
                             alt=""
                             className="w-[40px]"
                         />
@@ -92,7 +111,7 @@ export default function Index(props) {
         }).then((result) => {
             if (result.isConfirmed) {
                 router.get(
-                    route("admin.form-update-data-ibu", { id: value.id })
+                    route("admin.form-update-keanggotaan-ibu", { id: value.id })
                 );
             }
         });
@@ -110,7 +129,7 @@ export default function Index(props) {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(id);
-                router.delete(route("admin.delete-data-ibu", { id: id }), {
+                router.delete(route("admin.delete-data-keanggotaan-ibu", { id: id }), {
                     onSuccess: () => {
                         setOpenLoading(false);
                         setTimeout(() => {
@@ -127,16 +146,18 @@ export default function Index(props) {
             }
         });
     };
-    return (
-        <div>
-            <div className="w-full">
+    console.log(keanggotaanIbu)
+	return (
+
+		<div>
+			  <div className="w-full">
                 <Loading open={openLoading} setOpen={setOpenLoading} />
                 <div className="w-full">
                     <div className="flex items-center justify-end w-full">
                      
                         <div className="flex gap-3 items-center text-white">
                             <Link
-                                href={route("admin.form-data-ibu")}
+                                href={route("admin.form-keanggotaan-ibu")}
                                 className="py-1 px-2 rounded-lg bg-blue-500 hover:bg-blue-500"
                             >
                                 <Add color="inherit" fontSize="small" />
@@ -148,8 +169,8 @@ export default function Index(props) {
                         </div>
                     </div>
                     <div className="rounded-md w-full py-3">
-                        <DataTable
-                            data={dataIbu}
+                       <DataTable
+                            data={keanggotaanIbu}
                             columns={columns}
                             striped
                             highlightOnHover
@@ -160,10 +181,7 @@ export default function Index(props) {
                     </div>
                 </div>
             </div>
-        </div>
-    );
+		</div>
+		)
 }
-
-Index.layout = (page) => (
-    <AdminLayout children={page} title={"Kelola Data Ibu"} />
-);
+Index.layout = page => <AdminLayout children={page} title='Kelola Keanggotaan Ibu'/>

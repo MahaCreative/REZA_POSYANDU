@@ -18,7 +18,7 @@ export default function SelectOption({
                 id="demo-simple-select-filled"
                 label={label}
                 error={error ? true : false}
-                helpertext={error}
+                helperText={error}
                 {...props}
             >
                 {children}

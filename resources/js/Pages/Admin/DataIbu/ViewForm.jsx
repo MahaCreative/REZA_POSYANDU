@@ -8,6 +8,7 @@ import { MenuItem } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Select from "react-select";
+import DataTable from "react-data-table-component";
 export default function ViewForm(props) {
     const dataIbu = props.dataIbu;
     const { pekerjaan } = usePage().props;
@@ -41,7 +42,7 @@ export default function ViewForm(props) {
                         title: "Oops...",
                         text: "Gagal Melakukan melakukan perubahan data Silahkan Cek Formulir Isian Anda",
                     });
-                    console.log(errors);
+                    
                 }, 1000);
             },
             onSuccess: () => {
@@ -100,8 +101,8 @@ export default function ViewForm(props) {
             desa: dataIbu ? dataIbu.desa : "",
             dusun: dataIbu ? dataIbu.dusun : "",
             telephone: dataIbu ? dataIbu.telephone : "",
-            pendidikan_id: dataIbu ? dataIbu.pekerjaan.nama : "",
-            pekerjaan_id: dataIbu ? dataIbu.pendidikan.nama : "",
+            pendidikan_id: dataIbu ? dataIbu.pekerjaan_id : "",
+            pekerjaan_id: dataIbu ? dataIbu.pendidikan_id : "",
             foto: dataIbu ? dataIbu.foto : "",
         });
     }, [dataIbu]);

@@ -3,13 +3,16 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\DataAnakController;
 use App\Http\Controllers\DataIbuController;
+use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\KeanggotaanIbuController;
 use App\Http\Controllers\DataKaderController;
 use App\Http\Controllers\JenisVaksinController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use Illuminate\Http\Request;
+use App\Models\DataIbu;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,3 +55,36 @@ Route::get('data-anak', [DataAnakController::class, 'index'])->name('admin.data-
 Route::post('post-data-anak', [DataAnakController::class, 'store'])->name('admin.post-data-anak');
 Route::post('update-data-anak', [DataAnakController::class, 'update'])->name('admin.update-data-anak');
 Route::delete('delete-data-anak', [DataAnakController::class, 'delete'])->name('admin.delete-data-anak');
+Route::get('form-data-anak', [DataAnakController::class, 'form_data_anak'])->name('admin.form-data-anak');
+Route::get('form-update-data-anak', [DataAnakController::class, 'form_update_data_anak'])->name('admin.form-update-data-anak');
+
+
+Route::get('data-keanggotaan-ibu', [KeanggotaanIbuController::class, 'index'])->name('admin.data-keanggotaan-ibu');
+Route::get('form-keanggotaan-ibu', [KeanggotaanIbuController::class, 'form_keanggotaan_bu'])->name('admin.form-keanggotaan-ibu');
+Route::get('form-update-keanggotaan-ibu', [KeanggotaanIbuController::class, 'form_update_keanggotaan_bu'])->name('admin.form-update-keanggotaan-ibu');
+
+Route::post('post-data-keanggotaan-ibu', [KeanggotaanIbuController::class, 'store'])->name('admin.post-data-keanggotaan-ibu');
+Route::post('update-data-keanggotaan-ibu', [KeanggotaanIbuController::class, 'update'])->name('admin.update-data-keanggotaan-ibu');
+Route::delete('delete-data-keanggotaan-ibu', [KeanggotaanIbuController::class, 'delete'])->name('admin.delete-data-keanggotaan-ibu');
+
+Route::get('data-kegiatan', [KegiatanController::class, 'index'])->name('admin.data-kegiatan');
+Route::get('show-data-kegiatan', [KegiatanController::class, 'show'])->name('admin.show-data-kegiatan');
+Route::post('post-data-kegiatan', [KegiatanController::class, 'store'])->name('admin.post-data-kegiatan');
+Route::delete('delete-data-kegiatan', [KegiatanController::class, 'delete'])->name('admin.delete-data-kegiatan');
+
+
+
+
+
+
+
+
+
+Route::get('get-data-ibu', function(Request $request){
+	$query = DataIbu::query()->with('pekerjaan', 'pendidikan');
+	if($request->cari){
+		$query->where('nik', 'like', '%' . $request->cari . '%');
+	}
+	$dataAnak = $query->get();
+	return response()->json($dataAnak);
+});

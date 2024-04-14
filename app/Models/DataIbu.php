@@ -17,4 +17,14 @@ class DataIbu extends Model
     {
         return $this->belongsTo(Pendidikan::class);
     }
+    public function anak(){
+        return $this->hasMany(DataAnak::class);
+    }
+    public function keanggotaan(){
+        return $this->hasOne(KeanggotaanIbu::class);
+    }
+
+    public function pelayanan_ibu(){
+        return $this->belongsTo(PelayananIbu::class, 'data_ibu_id');
+    }
 }
